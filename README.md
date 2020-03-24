@@ -1,4 +1,4 @@
 # S.S.B
-Simple Slack Bot
+Super Simple Bot
 # Soon
 README File Comoing Soon
