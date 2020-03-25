@@ -2,7 +2,7 @@
 
 > Super Simple Bot
 
-This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworkd
+This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworke
 
 ## Built With
 
@@ -13,7 +13,7 @@ This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworkd
 ## Usage
 - [Make a Discord App/Bot](https://github.com/SinisterRectus/Discordia/wiki/Setting-up-a-Discord-application)
 - invite it to your server
-- Open bin/bot.rb and insert your token on line 6 (read mode about the discord token [Here](https://www.writebots.com/discord-bot-token/))
+- Open bin/bot.rb and insert your token on line 8 (read mode about the discord token [Here](https://www.writebots.com/discord-bot-token/))
 - Open Terminal
 - CD to the folder
 - enter "bundle install"
