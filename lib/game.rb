@@ -1,15 +1,13 @@
-# rubocop:disable Style/GlobalVars
 class Words
   def initialize
-    $words_group = {}
+    @words_group = {}
   end
 
   def add(word)
-    $words_group[word] = true
+    @words_group[word] = true
   end
 
   def check(word)
-    $words_group[word] == true
+    @words_group[word] == true
   end
 end
-# rubocop:enable Style/GlobalVars
