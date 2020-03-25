@@ -11,7 +11,8 @@ This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworkd
 
 
 ## Usage
-
+- [Make a Discord App/Bot](https://github.com/SinisterRectus/Discordia/wiki/Setting-up-a-Discord-application)
+- invite it to your server
 - Open bin/bot.rb and insert your token on line 6 (read mode about the discord token [Here](https://www.writebots.com/discord-bot-token/))
 - Open Terminal
 - CD to the folder
@@ -22,7 +23,7 @@ This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworkd
 
 ## Features
 - !game : starts a game of words, you enter all the words in one line and the bot will pick one, and you have to guess which one it picked.
-- !sum : you enter a line full of numbers seperated by a space, and the bot will sum them all together for you.
+- !sum : you enter a line full of numbers separated by a space, and the bot will sum them all together for you.
 - !info : credits.
 
 
