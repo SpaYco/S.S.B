@@ -2,7 +2,7 @@
 
 > Super Simple Bot
 
-This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworke
+This Is A Discord Bot Made With The Ruby Language and DiscordRb Framework
 
 ## Built With
 
