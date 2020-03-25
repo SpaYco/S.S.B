@@ -13,9 +13,9 @@ RSpec.describe Sum do
   end
   describe '#check' do
     it 'returns the total of the sum' do
-        number.add(5)
-        number.add(9)
-        expect(number.total).to eql(14)
+      number.add(5)
+      number.add(9)
+      expect(number.total).to eql(14)
     end
   end
 end

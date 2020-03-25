@@ -7,6 +7,7 @@ This Is A Discord Bot Made With The Ruby Language and DiscordRb Frameworkd
 ## Built With
 
 - Ruby
+- [Discordrb](https://github.com/discordrb/discordrb)
 
 
 ## Usage

@@ -4,6 +4,7 @@ require './lib/game.rb'
 require './lib/sum.rb'
 
 # Insert Your Bot Token Here, Use the README.md Instructions if you're not sure How
+# This Token is just an example and will NOT work
 bot = Discordrb::Bot.new token: 'NjkxOTk0Mzc5Nzc4MzkyMTI0.XnozMw.acF-a8Xm-RAtZE5PlF371ZQFFok'
 # rubocop:disable Metrics/BlockLength
 bot.message(start_with: '!game') do |event|
