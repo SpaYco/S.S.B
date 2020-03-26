@@ -4,11 +4,15 @@ class Secret
   end
 
   def add(user, password, secret)
-    @secrets[user] = [password, secret]
+    if @secrets[user]
+      false
+    else
+      @secrets[user] = [password, secret]
+    end
   end
 
   def check(user, password, *job)
-    if @secrets[user][0] == password
+    if exist?(user) && @secrets[user][0] == password
       if job[0] == 'show'
         show(user)
       elsif job[0] == 'change'
@@ -20,7 +24,7 @@ class Secret
   end
 
   def exist?(user)
-    @secrets[user]
+    @secrets[user] ? true : false
   end
 
   private

@@ -1,4 +1,4 @@
-require_relative './lib/sum.rb'
+require_relative '../lib/sum.rb'
 
 RSpec.describe Sum do
   let(:number) { Sum.new }
