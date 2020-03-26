@@ -2,7 +2,7 @@ require 'discordrb'
 require_relative './game.rb'
 require_relative './sum.rb'
 require_relative './secret.rb'
-# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/MethodLength, Metrics/ClassLength, Metrics/PerceivedComplexity
 class Bot
   def initialize(token_key)
     @bot = Discordrb::Bot.new token: token_key
@@ -123,6 +123,41 @@ class Bot
     end
   end
 
+  def change
+    @bot.message(start_with: '!change') do |event|
+      step = 0
+      name = ''
+      password = ''
+      secret_message = ''
+      event.user.await(:account) do |account_event|
+        if step.zero?
+          name = account_event.message.content.downcase
+          if @secrets.exist?(name)
+            step += 1
+            account_event.respond 'now enter your password (case sensitive)'
+          else
+            account_event.respond 'account does\'t exist, try again'
+          end
+          false
+        elsif step == 1
+          password = account_event.message.content
+          secret_message = @secrets.check(name, password, 'change')
+          if !secret_message
+            account_event.respond 'wrong password, try again'
+          else
+            account_event.respond 'what do you want your secret to change to?'
+            step += 1
+          end
+          false
+        else
+          secret_message = @secrets.check(name, password, 'change', account_event.message.content)
+          account_event.respond 'done :gloves:'
+        end
+      end
+      event.respond 'enter the username'
+    end
+  end
+
   def start
     @bot.run
   end
@@ -141,4 +176,4 @@ class Bot
     end
   end
 end
-# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/MethodLength, Metrics/ClassLength,  Metrics/PerceivedComplexity
