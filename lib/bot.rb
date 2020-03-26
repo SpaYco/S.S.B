@@ -1,12 +1,14 @@
 require 'discordrb'
 require_relative './game.rb'
 require_relative './sum.rb'
+require_relative './secret.rb'
+# rubocop:disable Metrics/MethodLength
 class Bot
   def initialize(token_key)
     @bot = Discordrb::Bot.new token: token_key
+    @secrets = Secret.new
   end
 
-  # rubocop:disable Metrics/MethodLength
   def game
     @bot.message(start_with: '!game') do |event|
       all_words = Words.new
@@ -46,7 +48,6 @@ class Bot
       event.respond 'you can check more work on https://github.com/SpaYco'
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   def info
     @bot.message(start_with: '!sum') do |event|
@@ -59,6 +60,66 @@ class Bot
         numbers_event.respond number.total
       end
       event.respond 'Enter All The Numbers To Sum In One Line'
+    end
+  end
+
+  def secret
+    @bot.message(start_with: '!secret') do |event|
+      step = 0
+      name = ''
+      password = ''
+      secret_message = ''
+      event.user.await(:account) do |account_event|
+        if step.zero?
+          name = account_event.message.content.downcase
+          if @secrets.exist?(name)
+            account_event.respond 'account already exist, enter another username'
+          else
+            step += 1
+            account_event.respond 'now enter your password (case sensitive)'
+          end
+          false
+        elsif step == 1
+          password = account_event.message.content
+          step += 1
+          account_event.respond 'now enter your secret'
+          false
+        elsif step == 2
+          secret_message = account_event.message.content
+          @secrets.add(name, password, secret_message)
+          account_event.respond 'done! :gloves:'
+
+        end
+      end
+      event.respond 'what do you want the username to be? (not case sensitive)'
+    end
+  end
+
+  def show
+    @bot.message(start_with: '!show') do |event|
+      step = 0
+      name = ''
+      event.user.await(:account) do |account_event|
+        if step.zero?
+          name = account_event.message.content.downcase
+          if @secrets.exist?(name)
+            step += 1
+            account_event.respond 'now enter your password (case sensitive)'
+          else
+            account_event.respond 'account does\'t exist, try again'
+          end
+          false
+        else
+          secret_message = @secrets.check(name, account_event.message.content, 'show')
+          if !secret_message
+            account_event.respond 'wrong password, try again'
+            false
+          else
+            account_event.respond secret_message
+          end
+        end
+      end
+      event.respond 'enter the username'
     end
   end
 
@@ -80,3 +141,4 @@ class Bot
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
